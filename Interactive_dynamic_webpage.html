@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS3 Transitions and Animations Demo</title>
+</head>
+<body>
+    <div class="container">
+        <button class="hover-button">Hover Me</button>
+        <button class="focus-button">Focus Me</button>
+        <div class="animated-banner">
+            <h2>Welcome to Our Website</h2>
+        </div>
+        <div class="loading-spinner"></div>
+        <button id="triggerAnimation">Trigger Animation</button>
+        <div class="animated-card" id="animated-card">
+            <h3>This is an animated card</h3>
+            <p>Click the button above to animate it!</p>
+        </div>
+    </div>
+
+    <style>
+        .container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .hover-button, .focus-button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .hover-button:hover, .focus-button:focus {
+            transform: scale(1.1);
+            background-color: #007bff;
+            color: white;
+        }
+
+        .animated-banner {
+            position: relative;
+            width: 300px;
+            height: 50px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .animated-banner h2 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f8f9fa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.5s ease-in-out;
+        }
+
+        .animated-banner h2.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .loading-spinner {
+            width: 80px;
+            height: 80px;
+            border: 10px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 10px solid #3498db;
+            margin-top: 20px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .animated-card {
+            width: 200px;
+            height: 150px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin-top: 20px;
+            transition: all 0.5s ease-in-out;
+            transform: translateY(20px);
+        }
+
+        .animated-card.active {
+            transform: translateY(0);
+        }
+    </style>
+
+    <script>
+        // Function with parameters and return values
+function calculateArea(length, width) {
+    return length * width;
+}
+
+// Function demonstrating scope
+let x = 10;
+
+function outerFunction() {
+    let y = 20;
+    
+    function innerFunction() {
+        console.log(x + y);
+    }
+    
+    innerFunction();
+}
+
+outerFunction();
+
+// Function to toggle a CSS class
+function toggleAnimation(elementId) {
+    const element = document.getElementById(elementId);
+    if (element) {
+        element.classList.toggle('active');
+    } else {
+        console.error(`Element with id ${elementId} not found`);
+    }
+}
+
+// Wait for the DOM to load completely before running the script
+window.onload = function() {
+    setTimeout(function() {
+        const triggerButton = document.getElementById('triggerAnimation');
+        if (triggerButton) {
+            triggerButton.addEventListener('click', () => {
+                toggleAnimation('animated-card');
+            });
+        } else {
+            console.error('Button with id "triggerAnimation" not found');
+        }
+    }, 100); // Small delay to ensure DOM is fully loaded
+};
+    </script>
+</body>
+</html>
